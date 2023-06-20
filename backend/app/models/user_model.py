@@ -1,5 +1,4 @@
 from typing import Optional
-from fastapi import Field
 from datetime import datetime
 from uuid import UUID, uuid4
 from beanie import Document, Indexed

@@ -13,4 +13,4 @@ async def list(current_user: User = Depends(get_current_user)):
 
 @todo_router.post('/create', summary="Create Todo", response_model=Todo)
 async def create_todo(data: TodoCreate, current_user: User = Depends(get_current_user)):
-    return await TodoService.create_todo(data, current_user)
+    return await TodoService.create_todo(current_user,data)

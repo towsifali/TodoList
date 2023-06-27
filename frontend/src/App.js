@@ -1,15 +1,39 @@
+import {Flex, Spinner} from "@chakra-ui/react";
 import { BrowserRouter as Router, Routes, Route, Navigate} from 'react-router-dom'
+import {Authenticated} from "./components/Auth/Authenticated";
 import { Login } from "./components/Auth/Login"
+import {PublicRoute} from "./components/Auth/PublicRoute";
 import { Register } from "./components/Auth/Register"
+import { AuthProvider, AuthConsumer} from './context/JWTAuthContext'
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/login" element={<Login />}/>
-        <Route path="/register" element={<Register/>}/>
-      </Routes>
-    </Router>
+    <>
+      <AuthProvider>
+        <Router>
+          <AuthConsumer>
+            {(auth) => !auth.isInitialized ? (
+              <Flex height="100vh" alignItems="center" justifyContent="center">
+                <Spinner
+                thickness = "4px"
+                speed ="0.65s"
+                emptyColor = "green.200"
+                color = "green.500"
+                />
+              </Flex>
+            ) : (
+              
+            <Routes>
+              <Route path="/login" element={<PublicRoute><Login/></PublicRoute>}/>
+              <Route path="/register" element={<PublicRoute><Register /></PublicRoute>}/>
+              <Route path="/" element={<Authenticated></Authenticated>}/>
+              <Route path="*" element={<Navigate to="/"/>}/>
+            </Routes>
+            )}
+          </AuthConsumer>
+        </Router>
+      </AuthProvider>
+    </>
   );
 }
 

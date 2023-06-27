@@ -4,6 +4,7 @@ import {Authenticated} from "./components/Auth/Authenticated";
 import { Login } from "./components/Auth/Login"
 import {PublicRoute} from "./components/Auth/PublicRoute";
 import { Register } from "./components/Auth/Register"
+import { TodoList } from "./components/Todo/TodoList";
 import { AuthProvider, AuthConsumer} from './context/JWTAuthContext'
 
 function App() {
@@ -26,7 +27,7 @@ function App() {
             <Routes>
               <Route path="/login" element={<PublicRoute><Login/></PublicRoute>}/>
               <Route path="/register" element={<PublicRoute><Register /></PublicRoute>}/>
-              <Route path="/" element={<Authenticated></Authenticated>}/>
+              <Route path="/" element={<Authenticated><TodoList/></Authenticated>}/>
               <Route path="*" element={<Navigate to="/"/>}/>
             </Routes>
             )}

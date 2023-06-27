@@ -9,7 +9,7 @@ class Settings(BaseSettings):
     ALGORITHM = "HS256"
     ACCESS_TOKEN_EXPIRATION_MINS:int = 15
     REFRESH_TOKEN_EXPIRATION_MINS:int = 60*24*7
-    BACKEND_CORS_ORIGINS: List[AnyHttpUrl] = []
+    BACKEND_CORS_ORIGINS: List[AnyHttpUrl] = ["http://localhost:3000"]
     PROJECT_NAME: str = "TodoList"
     
     #Databse

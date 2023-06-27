@@ -1,4 +1,3 @@
-import { getToken } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { createContext, useReducer, useRef } from "react"
 import axiosInstance from "../services/axios";
@@ -35,7 +34,7 @@ const handlers = {
             user,
         }
     },
-    LOGIN: (state) => {
+    LOGOUT: (state) => {
         return {
             ...state,
             isAuthenticated: false,
@@ -60,7 +59,7 @@ export const AuthProvider = (props) => {
                 if(accessToken && validateToken(accessToken)){
                     setSession(accessToken);
     
-                    const response = await axiosInstance.get("/user/me");
+                    const response = await axiosInstance.get("/users/me");
                     const {data: user} = response;
                     dispatch({
                         type: "INITIALIZE",

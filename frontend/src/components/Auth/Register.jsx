@@ -1,8 +1,17 @@
-import React from 'react'
-import {Button, Flex, FormControl, FormErrorMessage, Heading, Input, useColorModeValue} from '@chakra-ui/react'
-import {useForm} from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
-import { ThemeToggler } from '../Theme/ThemeToggler'
+import {
+  Button,
+  Flex,
+  FormControl,
+  FormErrorMessage,
+  Heading,
+  Input,
+  useColorModeValue,
+  useToast,
+} from "@chakra-ui/react";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import axiosInstance from "../../services/axios";
+import { ThemeToggler } from "../Theme/ThemeToggler";
 
 export const Register = () => {
     const {
@@ -12,9 +21,26 @@ export const Register = () => {
     } = useForm();
 
     const navigate = useNavigate();
-    const onSubmit = (values) =>{
-        console.log(values)
-    }
+    const toast = useToast();
+    const onSubmit = async (values) => {
+      try {
+        await axiosInstance.post("/users/create", values);
+        toast({
+          title: "Account created successfully.",
+          status: "success",
+          isClosable: true,
+          duration: 1500,
+        });
+        navigate("/login", { replace: true });
+      } catch (err) {
+        toast({
+          title: `${err.response.data.detail}`,
+          status: "error",
+          isCloseable: true,
+          duration: 1500,
+        });
+      }
+    };
   return (
     <Flex height="100vh" alignItems="center" justifyContent="center">
       <Flex

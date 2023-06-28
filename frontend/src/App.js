@@ -11,6 +11,7 @@ import { PublicRoute } from "./components/Auth/PublicRoute";
 import { Register } from "./components/Auth/Register";
 import { Navbar } from "./components/Navbar/Navbar";
 import { TodoList } from "./components/Todo/TodoList";
+import { TodoDetails } from "./components/Todo/TodoDetails";
 import { AuthConsumer, AuthProvider } from "./context/JWTAuthContext";
 
 function App() {
@@ -58,6 +59,14 @@ function App() {
                       element={
                         <Authenticated>
                           <TodoList />
+                        </Authenticated>
+                      }
+                    />
+                    <Route
+                      path="/todoId"
+                      element={
+                        <Authenticated>
+                          <TodoDetails />
                         </Authenticated>
                       }
                     />

@@ -24,7 +24,7 @@ import {
           color="white"
         >
           <Text as="h2" fontSize={24} fontWeight="bold">
-            FODOIST
+            TodoList
           </Text>
           <Stack direction="row" align="center" spacing={4}>
             <ThemeToggler size="lg" />

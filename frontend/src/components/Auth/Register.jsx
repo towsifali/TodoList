@@ -14,33 +14,33 @@ import axiosInstance from "../../services/axios";
 import { ThemeToggler } from "../Theme/ThemeToggler";
 
 export const Register = () => {
-    const {
-        handleSubmit,
-        register,
-        formState: {errors, isSubmitting}
-    } = useForm();
+  const {
+    handleSubmit,
+    register,
+    formState: { errors, isSubmitting },
+  } = useForm();
+  const navigate = useNavigate();
+  const toast = useToast();
 
-    const navigate = useNavigate();
-    const toast = useToast();
-    const onSubmit = async (values) => {
-      try {
-        await axiosInstance.post("/users/create", values);
-        toast({
-          title: "Account created successfully.",
-          status: "success",
-          isClosable: true,
-          duration: 1500,
-        });
-        navigate("/login", { replace: true });
-      } catch (err) {
-        toast({
-          title: `${err.response.data.detail}`,
-          status: "error",
-          isCloseable: true,
-          duration: 1500,
-        });
-      }
-    };
+  const onSubmit = async (values) => {
+    try {
+      await axiosInstance.post("/users/create", values);
+      toast({
+        title: "Account created successfully.",
+        status: "success",
+        isClosable: true,
+        duration: 1500,
+      });
+      navigate("/login", { replace: true });
+    } catch (err) {
+      toast({
+        title: `${err.response.data.detail}`,
+        status: "error",
+        isCloseable: true,
+        duration: 1500,
+      });
+    }
+  };
   return (
     <Flex height="100vh" alignItems="center" justifyContent="center">
       <Flex
@@ -71,26 +71,27 @@ export const Register = () => {
             <Input
               placeholder="username"
               background={useColorModeValue("gray.300", "gray.600")}
-              type="username"
+              type="text"
+              variant="filled"
               size="lg"
               mt={6}
               {...register("username", {
-                required: "This is required field",
+                required: "This filed is required",
                 minLength: {
-                    value: 5,
-                    message: "Username must be at least 5 characters",
+                  value: 5,
+                  message: "Username must be at least 5 characters",
                 },
                 maxLength: {
-                    value: 24,
-                    message: "Username must be at most 24 characters",
-                }
+                  value: 24,
+                  message: "Username must be at most 24 characters",
+                },
               })}
             />
             <FormErrorMessage>
               {errors.username && errors.username.message}
             </FormErrorMessage>
           </FormControl>
-          <FormControl isInvalid={errors.password}>
+          <FormControl isInvalid={errors.email}>
             <Input
               placeholder="Password"
               background={useColorModeValue("gray.300", "gray.600")}
@@ -100,12 +101,12 @@ export const Register = () => {
               {...register("password", {
                 required: "This is required field",
                 minLength: {
-                    value: 5,
-                    message: "Password must be at least 5 characters",
+                  value: 5,
+                  message: "Password must be at least 5 characters long",
                 },
                 maxLength: {
-                    value: 24,
-                    message: "Password must be at most 24 characters",
+                  value: 24,
+                  message: "Password must be at most 24 characters",
                 },
               })}
             />
@@ -115,7 +116,7 @@ export const Register = () => {
           </FormControl>
           <Button
             isLoading={isSubmitting}
-            loadingText="Logging in..."
+            loadingText="Creating account..."
             width="100%"
             colorScheme="green"
             variant="outline"

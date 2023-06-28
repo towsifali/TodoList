@@ -1,32 +1,40 @@
-import React from 'react'
-import {Button, Flex, FormControl, FormErrorMessage, Heading, Input, useColorModeValue, useToast} from '@chakra-ui/react'
-import {useForm} from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../../hooks/useAuth'
-import { ThemeToggler } from '../Theme/ThemeToggler'
+import {
+  Button,
+  Flex,
+  FormControl,
+  FormErrorMessage,
+  Heading,
+  Input,
+  useColorModeValue,
+  useToast,
+} from "@chakra-ui/react";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
+import { ThemeToggler } from "../Theme/ThemeToggler";
 
 export const Login = () => {
-    const {
-        handleSubmit,
-        register,
-        formState: {errors, isSubmitting}
-    } = useForm();
+  const {
+    handleSubmit,
+    register,
+    formState: { errors, isSubmitting },
+  } = useForm();
+  const navigate = useNavigate();
+  const { login } = useAuth();
+  const toast = useToast();
 
-    const navigate = useNavigate();
-    const {login} = useAuth();
-    const toast = useToast();
-    const onSubmit = async (values) =>{
-      try {
-        await login(values.email, values.password);
-      } catch (error) {
-        toast({
-          title: "Invalid email or password",
-          status: "error",
-          isClosable: true,
-          duration: 1500,
-        })
-      }
+  const onSubmit = async (values) => {
+    try {
+      await login(values.email, values.password);
+    } catch (error) {
+      toast({
+        title: "Invalid email or password",
+        status: "error",
+        isClosable: true,
+        duration: 1500,
+      });
     }
+  };
   return (
     <Flex height="100vh" alignItems="center" justifyContent="center">
       <Flex

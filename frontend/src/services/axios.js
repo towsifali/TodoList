@@ -1,4 +1,3 @@
-import { defineCssVars } from '@chakra-ui/react';
 import axios from 'axios';
 
 const baseURL = 'http://localhost:8000/api/v1/';

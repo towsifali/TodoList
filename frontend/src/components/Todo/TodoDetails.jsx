@@ -101,7 +101,7 @@ import {
           justifyContent="space-between"
         >
           <Text fontSize={22}>{todo.title}</Text>
-          <Text bg="gray.500" mt={2} p={2} rounded="lg">
+          <Text bg="gray.400" mt={2} p={2} rounded="lg">
             {todo.description}
           </Text>
           <AddUpdateTodo

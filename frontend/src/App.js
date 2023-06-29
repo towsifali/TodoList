@@ -10,8 +10,8 @@ import { Login } from "./components/Auth/Login";
 import { PublicRoute } from "./components/Auth/PublicRoute";
 import { Register } from "./components/Auth/Register";
 import { Navbar } from "./components/Navbar/Navbar";
-import { TodoList } from "./components/Todo/TodoList";
 import { TodoDetails } from "./components/Todo/TodoDetails";
+import { TodoList } from "./components/Todo/TodoList";
 import { AuthConsumer, AuthProvider } from "./context/JWTAuthContext";
 
 function App() {
@@ -63,7 +63,7 @@ function App() {
                       }
                     />
                     <Route
-                      path="/todoId"
+                      path="/:todoId"
                       element={
                         <Authenticated>
                           <TodoDetails />

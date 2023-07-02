@@ -13,12 +13,14 @@ Clone the repository on your machine.
 Run the following commands in one terminal:
 
 ```bash
+cd backend
 /venv/Scripts/activate.bat
 uvicorn main:app --reload
 ```
 Then in another terminal run:
 
 ```bash
+cd frontend
 npm install
 npm run start
 ```
